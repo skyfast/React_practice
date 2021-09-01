@@ -34,7 +34,7 @@ const deleteTask = (id) => {
     <div className="container">
       <Header title="Welcome To Sky's app" >
       </Header>
-      <Tasks tasks={tasks} onDelete={deleteTask}/>
+      {tasks.length > 0 ?<Tasks tasks={tasks} onDelete={deleteTask}/> : "No Tasks to show!"}
     </div>
   );
 }
