@@ -5,6 +5,7 @@ import AddTask from './components/AddTask'
 
 
 function App() {
+  const [showForm, setShowForm] = useState(false)
   const [tasks, setTasks] = useState([
     {
         id: 1,
@@ -44,9 +45,9 @@ const toggleReminder = (id) =>{
 
   return (
     <div className="container">
-      <Header title="Welcome To Sky's app" >
+      <Header title="Welcome To Sky's app" onAdd ={ () => setShowForm(!showForm) } >
       </Header>
-      <AddTask onAdd={addTask}/>
+      {showForm &&<AddTask onAdd={addTask}/> }
       {tasks.length > 0 ?<Tasks tasks={tasks} onDelete={deleteTask}
       onToggle={toggleReminder}/> : "No Tasks to show!"}
     </div>
