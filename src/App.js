@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Header from './components/Header'
 import Tasks from './components/Tasks'
+import AddTask from './components/AddTask'
 
 
 function App() {
@@ -39,6 +40,7 @@ const toggleReminder = (id) =>{
     <div className="container">
       <Header title="Welcome To Sky's app" >
       </Header>
+      <AddTask />
       {tasks.length > 0 ?<Tasks tasks={tasks} onDelete={deleteTask}
       onToggle={toggleReminder}/> : "No Tasks to show!"}
     </div>
