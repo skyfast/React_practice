@@ -6,7 +6,9 @@ import AddTask from './components/AddTask'
 
 function App() {
   const [showForm, setShowForm] = useState(false)
-  const [tasks, setTasks] = useState([
+  const [tasks, setTasks] = useState(
+    !localStorage.getItem('tasksList') ?
+    [
     {
         id: 1,
         text: 'Doctors Appointment',
@@ -25,7 +27,10 @@ function App() {
         day: 'Feb 5th at 2:30pm',
         reminder: false,
     }
-])
+]
+:
+JSON.parse(localStorage.getItem('tasksList'))
+)
 
 //Add task
 const addTask = (task) => {
@@ -43,9 +48,12 @@ const toggleReminder = (id) =>{
   setTasks(tasks.map((task) => task.id === id ? {...task, reminder: !task.reminder}: task))
 }
 
+localStorage.setItem('tasksList', JSON.stringify(tasks))
+
+
   return (
     <div className="container">
-      <Header title="Welcome To Sky's app" onAdd ={ () => setShowForm(!showForm) } >
+      <Header title="How do you do?" className='header' show={showForm} onAdd ={ () => setShowForm(!showForm) } >
       </Header>
       {showForm &&<AddTask onAdd={addTask}/> }
       {tasks.length > 0 ?<Tasks tasks={tasks} onDelete={deleteTask}
